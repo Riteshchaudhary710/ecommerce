@@ -6,12 +6,12 @@ import { removedSelectedProduct, selectProduct } from "../../redux/actions/produ
 
 const ProductDetails = () =>{
     const product = useSelector((state) => state.product.product)
-    const {id,image,title,price,category,description} = product;
+    const {image,title,price,category,description} = product;
     const { productId } = useParams();
     const  dispatch = useDispatch();
 
-    const fetchSingleProduct = async () =>{
-        const response = await axios.get(`https://fakestoreapi.com/products/${productId}`)
+    const fetchSingleProduct = async (id) =>{
+        const response = await axios.get(`https://fakestoreapi.com/products/${id}`)
         .catch((error)=>{
             console.log("Error", error)
         });
@@ -19,15 +19,16 @@ const ProductDetails = () =>{
     };
 
     useEffect(() => {
-        if(productId && productId !== "") { fetchSingleProduct()};
+        if (productId && productId !== "") fetchSingleProduct(productId);
+
         return () => {
-            dispatch(removedSelectedProduct());
-        }
-    },[productId])
+        //   dispatch(removedSelectedProduct());
+        };
+      }, [dispatch,productId]);
 
     return(
         <>
-            <div className="product-box" key={id}>
+            <div className="product-box" key={productId}>
                 <div className="row-100">
                     <div className="col-50">
                         <figure>

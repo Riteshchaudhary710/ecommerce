@@ -10,7 +10,7 @@ const  ProductBox = () => {
             <>
               <div className="product-box col-33" key={id}>
                 <Link to={`/product/${id}`} >
-                    <div class="product-title">
+                    <div className="product-title">
                         <figure>
                             <img src={image} alt={title} />
                         </figure>
